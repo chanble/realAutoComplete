@@ -69,7 +69,7 @@
 				tempData = [];
 				$.ajax({
 					type:t.options.ajaxDataType
-					,data : 'filter='+t.input.val()+'&matchModel='+t.options.matchModel
+					,data : 'filter='+t.input.val()+'&matchModel='+t.options.matchModel+'&maxNum='+t.options.maxNum
 					,dataType:t.options.dataType
 					,url :t.options.url
 					,timeout : 5000
