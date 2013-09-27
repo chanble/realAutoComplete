@@ -1,9 +1,9 @@
 /**
- * jquery.wyautocomplete.js
+ * jquery.realAutoComplete.js
  * auto by Chen Bo
  */
 (function ($){
-	$.fn.WYAutoComplete = function (opts){
+	$.fn.RealAutoComplete = function (opts){
 		$.each(this, function (i, v){
 			var input = v;
 			new auto_complete(input,opts);
@@ -85,7 +85,7 @@
 			return returnData;
 		}
 		,build: function (){
-			var dataListView  = this.dataListView = $('<ul class="wyac_competelist" style="position:absolute; z-index:9999; display:none;"></ul>');
+			var dataListView  = this.dataListView = $('<ul class="rac_competelist" style="position:absolute; z-index:9999; display:none;"></ul>');
 			var inputPos = this.input.offset();
 			var inputHeight = this.input.outerHeight();
 			dataListView.width( this.input.width());
@@ -102,7 +102,7 @@
 			var that = this;
 			that.release();
 			$.each(d, function (i,v){
-				var dataListItem = $('<li class="wyca_nomal"><a>' + v + '</a></li>');
+				var dataListItem = $('<li class="rac_nomal"><a>' + v + '</a></li>');
 				that.dataListView.prepend(dataListItem);
 			});
 			that.selectItem(that.dataListView.find("li:first"));
@@ -172,33 +172,33 @@
 			if (item.jquery == 'undefined'){
 				item = $(item);
 			}
-			this.dataListView.find("li.wyac_selected").removeClass('wyac_selected');
-			$(item).addClass('wyac_selected');
+			this.dataListView.find("li.rac_selected").removeClass('rac_selected');
+			$(item).addClass('rac_selected');
 		}
 		,completeInput : function (){
-			var inputText = this.dataListView.find("li.wyac_selected a").text();
+			var inputText = this.dataListView.find("li.rac_selected a").text();
 			this.input.val(inputText);
 			this.release();
 		}
 		,moveSelected: function (d){
 			var newItem ;
 			if (d == 'up'){
-				newItem = this.dataListView.find("li.wyac_selected").prev();
+				newItem = this.dataListView.find("li.rac_selected").prev();
 				//按上下键时，让选中项循环
 				if (newItem.length <= 0){
-					newItem = this.dataListView.find("li.wyca_nomal").last();
+					newItem = this.dataListView.find("li.rac_nomal").last();
 				}
 			}else if (d == 'down'){
-				newItem = this.dataListView.find("li.wyac_selected").next();
+				newItem = this.dataListView.find("li.rac_selected").next();
 				if (newItem.length <= 0){
-					newItem = this.dataListView.find("li.wyca_nomal").first();
+					newItem = this.dataListView.find("li.rac_nomal").first();
 				}
 			}
 			this.selectItem(newItem)
 		}
 		,addMouseEventListItem: function (){	//添加鼠标事件
 			var that = this;
-			var listItem = this.dataListView.find("li.wyca_nomal");
+			var listItem = this.dataListView.find("li.rac_nomal");
 			listItem.mouseover(function(){
 				that.selectItem(this);
 			});
