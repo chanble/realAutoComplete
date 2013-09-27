@@ -17,9 +17,9 @@
 		<input type="text" class="wyac" id="wyac1"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" id="ac" class="wyac" />
 		<script type="text/javascript">
 		$(document).ready(function(){
-			$("#wyac1").WYAutoComplete({url:'test.php'});
+			$("#wyac1").RealAutoComplete({url:'test.php'});
 			var da = ['one' ,'tow' ,'three' ,'four' ,'five', 'six', 'seven', 'eight', 'nine', 'ten', 'one1', 'two1' ,'three1', 'four1'];
-			$("#ac").WYAutoComplete({matchModel:'every', data:da, maxNum: 3});
+			$("#ac").RealAutoComplete({matchModel:'every', data:da, maxNum: 3});
 			//$(".wyac").WYAutoComplete({matchModel:'every', data:da, maxNum: 3});
 		});
 		
