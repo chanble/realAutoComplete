@@ -9,20 +9,20 @@
 root {
     display: block;
 }
-ul.wyac_competelist{
+ul.rac_competelist{
 	padding: 1px 0px 1px 2px;
 	background: #FEFEFE;
 	border: 1px solid #999999;
 	overflow: hidden;
 	margin: 0px 0px 0px 0px;
 }
-.wyac_competelist li{
+.rac_competelist li{
 	list-style-type:none;
 	width: 100%;
 }
-.wyac_competelist li a{
+.rac_competelist li a{
 	text-decoration: none;
 }
-.wyac_selected{
+.rac_selected{
 	background-color: #DCDCDC;
 }
