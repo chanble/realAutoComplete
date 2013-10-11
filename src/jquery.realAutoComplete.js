@@ -8,7 +8,7 @@
 			var input = v;
 			new auto_complete(input,opts);
 		});
-	}
+	};
 	var auto_complete = function (el, opts){
 		var that = this;
 		if (typeof(opts) != "object"){
@@ -27,8 +27,8 @@
 		that.input.blur(function () {	//文本框失去焦点时
 			$(document).one('click', function(){that.listHide();});
 		});
-	}
-	auto_complete.options = {}
+	};
+	auto_complete.options = {};
 	//默认配置
 	auto_complete.DEFAULT_OPTS = {
 		dataType : 'json'	//网络得到数据的格式
