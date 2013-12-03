@@ -1,0 +1,28 @@
+/*
+    Document   : realAutoComplete.css
+    Created on : 2013-9-25, 15:59:53
+    Author     : Chen
+    Description:
+        
+*/
+
+root {
+    display: block;
+}
+ul.rac_competelist{
+	padding: 1px 0px 1px 2px;
+	background: #FEFEFE;
+	border: 1px solid #999999;
+	overflow: hidden;
+	margin: 0px 0px 0px 0px;
+}
+.rac_competelist li{
+	list-style-type:none;
+	width: 100%;
+}
+.rac_competelist li a{
+	text-decoration: none;
+}
+.rac_selected{
+	background-color: #DCDCDC;
+}
