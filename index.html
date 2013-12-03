@@ -7,7 +7,9 @@
     <meta name="description" content="Realautocomplete : 一个简单的jquery自动补全插件" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
+    <link rel="stylesheet" type="text/css" media="screen" href="src/realAutoComplete.css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+	<script src="src/jquery.realAutoComplete.js" type="text/javascript"></script>
     <title>Realautocomplete</title>
   </head>
 
@@ -39,32 +41,40 @@
 <h3>
 <a name="you-can-install-it-like-this" class="anchor" href="#you-can-install-it-like-this"><span class="octicon octicon-link"></span></a>You can install it like this:</h3>
 
-<pre><code>download it to you documentroot directory.
+1,<pre><code>download it to you documentroot directory.
+</code></pre>
+2,
+<pre><code>http://localhost/realAutoComplete/test/autoComplete.html
 </code></pre>
 
-<p>``</p>
+<h3>
+<a name="document" class="anchor" href="#document"><span class="octicon octicon-link"></span></a>docurmnt:</h3>
+<pre><code>
+	var da = ['one' ,'tow' ,'three' ,'four'
+			,'five', 'six', 'seven', 'eight'
+			, 'nine', 'ten', 'one1', 'two1'
+			,'three1', 'four1'];
+	$("#ac").RealAutoComplete({matchModel:'every', data:da, maxNum: 3});
+</code></pre>
+<p>Or you can get data from web server:</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<pre><code>
+$("#ac").RealAutoComplete({url:'your url (e.g localhost/server.php)'
+							,matchModel:'every'//
+							, data:da, maxNum: 3
+						});
+</code></pre>
+
 
 <h3>
 <a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo:</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<input type="text" name="" id="ac" class="wyac" />
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="Contact" class="anchor" href="#Contact"><span class="octicon octicon-link"></span></a>Contact</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Having trouble with this project? contact me <a href="mailto:chanbo.cn@gmail.com">chanbo.cn@gmail.com</a> and I’ll help you.</p>
       </section>
     </div>
 
@@ -76,7 +86,13 @@
       </footer>
     </div>
 
-    
+	<script type="text/javascript">
+		$(document).ready(function(){
+			//$("#wyac1").RealAutoComplete({url:'test.php'});
+			var da = ['one' ,'tow' ,'three' ,'four' ,'five', 'six', 'seven', 'eight', 'nine', 'ten', 'one1', 'two1' ,'three1', 'four1'];
+			$("#ac").RealAutoComplete({matchModel:'every', data:da, maxNum: 3});
+		});
+	</script>
 
   </body>
 </html>
