@@ -59,8 +59,8 @@
 
 <pre><code>
 $("#ac").RealAutoComplete({url:'your url (e.g localhost/server.php)'
-							,matchModel:'every'//
-							, data:da, maxNum: 3
+							,matchModel:'every'//pre, every
+							, data:da, maxNum: 3 //number of show
 						});
 </code></pre>
 
@@ -88,7 +88,7 @@ $("#ac").RealAutoComplete({url:'your url (e.g localhost/server.php)'
 	<script type="text/javascript">
 		$(document).ready(function(){
 			//$("#wyac1").RealAutoComplete({url:'test.php'});
-			var da = ['one' ,'tow' ,'three' ,'four' ,'five', 'six', 'seven', 'eight', 'nine', 'ten', 'one1', 'two1' ,'three1', 'four1'];
+			var da = ['absolute','chanble','delete','one' ,'tow' ,'three' ,'four' ,'five', 'six', 'seven', 'eight', 'nine', 'ten', 'one1', 'two1' ,'three1', 'four1'];
 			$("#ac").RealAutoComplete({matchModel:'every', data:da, maxNum: 3});
 		});
 	</script>
