@@ -21,12 +21,12 @@
 		that.data = that.options.data;	//数据
 		that.input = el;	//input输入框
 		that.build();	//生成ul框
-		that.input.keyup(function (e) {that.keyupHandler(e);});	//文本框内容改变时
-		that.input.keydown(function (e) {that.keydownHandler(e);});	//当按下enter、up、down键时
-		that.input.dblclick(function () {that.reload();});	//双击文本框时
-		that.input.blur(function () {	//文本框失去焦点时
-			$(document).one('click', function(){that.listHide();});
-		});
+		that.input.keyup(function (e) {that.keyupHandler(e);})	//文本框内容改变时
+			.keydown(function (e) {that.keydownHandler(e);})	//当按下enter、up、down键时
+			.dblclick(function () {that.reload();})	//双击文本框时
+			.blur(function () {	//文本框失去焦点时
+				$(document).one('click', function(){that.listHide();});
+			});
 	};
 	auto_complete.options = {};
 	//默认配置
@@ -41,7 +41,7 @@
 	};
 	auto_complete.prototype = {
 		getData : function (){	//得到数据
-			b = this.input.val();
+			var b = this.input.val();
 			if (typeof(b) != "string" || b == ''){
 				return [];
 			}
@@ -88,42 +88,44 @@
 			var dataListView  = this.dataListView = $('<ul class="rac_competelist" style="position:absolute; z-index:9999; display:none;"></ul>');
 			var inputPos = this.input.offset();
 			var inputHeight = this.input.outerHeight();
-			dataListView.width( this.input.width());
-			dataListView.css('left', inputPos.left);
-			dataListView.css('top', inputPos.top + inputHeight);
-			this.input.after(dataListView);
+			this.input.after(
+				dataListView.width( this.input.width())
+				.css({'left':inputPos.left, 'top': inputPos.top + inputHeight})
+			);
+			return this;
 		}
 		,reload : function (){
 			var d = this.getData();
 			if (typeof(d) != "object" || d.length == 0){
-				this.listHide();
-				return ;
+				return this.listHide();
 			}
 			var that = this;
 			that.release();
 			$.each(d, function (i,v){
-				var dataListItem = $('<li class="rac_nomal"><a>' + v + '</a></li>');
-				that.dataListView.prepend(dataListItem);
+				that.dataListView.prepend($('<li class="rac_nomal"><a>' + v + '</a></li>'));
 			});
-			that.selectItem(that.dataListView.find("li:first"));
-			that.addMouseEventListItem();
-			that.listShow();
+			return that.selectItem(that.dataListView.find("li:first"))
+				.addMouseEventListItem()
+				.listShow();
 		}
 		,listShow : function (){
 			if (this.dataListView.css('display') == 'none'){
 				this.dataListView.css('display', 'block');
 			}
+			return this;
 		}
 		,listHide : function (){
 			if (this.dataListView.css('display') != 'none'){
 				this.dataListView.css('display', 'none');
 			}
+			return this;
 		}
 		,keydownHandler: function(event) {
 			switch (event.keyCode){
 				case 13://enter
 					if (this.options.completeKey == 'enter'){
 						this.completeInput();
+						event.stopPropagation();
 					}
 					break;
 				case 16: // shift
@@ -131,25 +133,30 @@
 				case 37: // left
 					if (this.options.completeKey == 'left'){
 						this.completeInput();
+						event.stopPropagation();
 					}
 					break;
 				case 39: // right
 					if (this.options.completeKey == 'right'){
 						this.completeInput();
+						event.stopPropagation();
 					}
 					break;
 				case 38://up
 					this.moveSelected('up');
+					event.stopPropagation();
 					break;
 				case 40://down
 					this.moveSelected('down');
+					event.stopPropagation();
 					break;
 				case 27:	//esc
 					this.listHide();
+					event.stopPropagation();
 					break;
 				default :
-					return;
 			}
+			return this;
 		}
 		,keyupHandler: function(event) {
 			switch (event.keyCode){
@@ -165,8 +172,8 @@
 					break;
 				default :
 					this.reload();
-					return;
 			}
+			return this;
 		}
 		,selectItem : function(item){//改变选中项的背景色
 			if (item.jquery == 'undefined'){
@@ -174,11 +181,12 @@
 			}
 			this.dataListView.find("li.rac_selected").removeClass('rac_selected');
 			$(item).addClass('rac_selected');
+			return this;
 		}
 		,completeInput : function (){
 			var inputText = this.dataListView.find("li.rac_selected a").text();
 			this.input.val(inputText);
-			this.release();
+			return this.release();
 		}
 		,moveSelected: function (d){
 			var newItem ;
@@ -194,21 +202,22 @@
 					newItem = this.dataListView.find("li.rac_nomal").first();
 				}
 			}
-			this.selectItem(newItem)
+			return this.selectItem(newItem)
 		}
 		,addMouseEventListItem: function (){	//添加鼠标事件
 			var that = this;
 			var listItem = this.dataListView.find("li.rac_nomal");
 			listItem.mouseover(function(){
 				that.selectItem(this);
-			});
-			listItem.click(function(){
+			})
+			.click(function(){
 				that.completeInput();
 			});
+			return this;
 		}
 		,release : function (){//清空ul内的所有项
 			this.dataListView.html('');
-			this.listHide();
+			return this.listHide();
 		}
 	}
 })(jQuery);
