@@ -20,6 +20,7 @@
 		}
 		that.data = that.options.data;	//数据
 		that.input = el;	//input输入框
+		that.disableComplete(that.input);
 		that.build();	//生成ul框
 		that.input.keyup(function (e) {that.keyupHandler(e);})	//文本框内容改变时
 			.keydown(function (e) {that.keydownHandler(e);})	//当按下enter、up、down键时
@@ -218,6 +219,9 @@
 		,release : function (){//清空ul内的所有项
 			this.dataListView.html('');
 			return this.listHide();
+		}
+		,disableComplete: function(element){
+			$(element).attr('autocomplete', 'off');
 		}
 	}
 })(jQuery);
