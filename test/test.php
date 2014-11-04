@@ -7,6 +7,7 @@ $data = array('one','one2', 'two' , 'two1' , 'two2' , 'two3' , 'two4' ,'three', 
 			, 'five', 'five1', 'five2', 'five3', 'five4', 'five5', 'five6', 'five7'
 		);
 $res = array();
+sleep(3);
 foreach ($data as $key => $value)
 {
 	switch ($matchModel)

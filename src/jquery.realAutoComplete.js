@@ -2,7 +2,7 @@
  * jquery.realAutoComplete.js
  * auto by Chen Bo
  */
-(function ($){
+(function ($,window){
 	$.fn.RealAutoComplete = function (opts){
 		$.each(this, function (i, v){
 			var input = v;
@@ -20,7 +20,7 @@
 		}
 		that.data = that.options.data;	//数据
 		that.input = el;	//input输入框
-		that.disableComplete(that.input);
+		that.disableComplete(that.input);//阻止浏览器自己自动补全
 		that.build();	//生成ul框
 		that.input.keyup(function (e) {that.keyupHandler(e);})	//文本框内容改变时
 			.keydown(function (e) {that.keydownHandler(e);})	//当按下enter、up、down键时
@@ -40,8 +40,9 @@
 		,maxNum : 10 //列表最长长度,当数据来自网络时，js并不控制，而只是将这个信息传递给对方。
 		,ajaxDataType : 'post'//ajax数据方式
 	};
+	auto_complete.xhr = false;
 	auto_complete.prototype = {
-		getData : function (){	//得到数据
+		getData : function (callback){	//得到数据
 			var b = this.input.val();
 			if (typeof(b) != "string" || b == ''){
 				return [];
@@ -66,19 +67,27 @@
 						}
 					}
 				});
+				callback.call(t, returnData);
 			}else{
 				tempData = [];
-				$.ajax({
+				if(t.xhr){
+					console.log(t.xhr.readyState);
+				}
+				if(t.xhr && t.xhr.readyState != 4){
+					t.xhr.abort();
+				}
+				t.xhr = $.ajax({
 					type:t.options.ajaxDataType
 					,data : 'filter='+t.input.val()+'&matchModel='+t.options.matchModel+'&maxNum='+t.options.maxNum
 					,dataType:t.options.dataType
 					,url :t.options.url
 					,timeout : 5000
-					,async :false
+					,async :true
 					,success : function (data){
 						$.each(data, function (k, v){
 							tempData.push(v);
 						});
+						callback.call(t, tempData);
 					}
 				});
 				returnData = tempData;
@@ -96,18 +105,20 @@
 			return this;
 		}
 		,reload : function (){
-			var d = this.getData();
-			if (typeof(d) != "object" || d.length == 0){
-				return this.listHide();
-			}
-			var that = this;
-			that.release();
-			$.each(d, function (i,v){
-				that.dataListView.prepend($('<li class="rac_nomal"><a>' + v + '</a></li>'));
+			this.getData(function(d){
+				if (typeof(d) != "object" || d.length == 0){
+					return this.listHide();
+				}
+				var that = this;
+				that.release();
+				$.each(d, function (i,v){
+					that.dataListView.prepend($('<li class="rac_nomal"><a>' + v + '</a></li>'));
+				});
+				return that.selectItem(that.dataListView.find("li:first"))
+					.addMouseEventListItem()
+					.listShow();
 			});
-			return that.selectItem(that.dataListView.find("li:first"))
-				.addMouseEventListItem()
-				.listShow();
+			return this;
 		}
 		,listShow : function (){
 			if (this.dataListView.css('display') == 'none'){
@@ -224,4 +235,4 @@
 			$(element).attr('autocomplete', 'off');
 		}
 	}
-})(jQuery);
+})(jQuery, window);
