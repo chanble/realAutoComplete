@@ -98,7 +98,7 @@
 			var dataListView  = this.dataListView = $('<ul class="rac_competelist" style="position:absolute; z-index:9999; display:none;"></ul>');
 			var inputPos = this.input.offset();
 			var inputHeight = this.input.outerHeight();
-			this.input.after(
+			$('body').append(
 				dataListView.width( this.input.width())
 				.css({'left':inputPos.left, 'top': inputPos.top + inputHeight})
 			);
