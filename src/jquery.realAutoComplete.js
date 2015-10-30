@@ -28,6 +28,9 @@
 			.blur(function () {	//文本框失去焦点时
 				$(document).one('click', function(){that.listHide();});
 			});
+		$('body').click(function(){
+			that.input.blur().val('');
+		});
 	};
 	auto_complete.options = {};
 	//默认配置
