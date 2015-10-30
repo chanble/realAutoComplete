@@ -112,7 +112,7 @@
 				var that = this;
 				that.release();
 				$.each(d, function (i,v){
-					that.dataListView.prepend($('<li class="rac_nomal"><a>' + v + '</a></li>'));
+					that.dataListView.prepend($('<li class="rac_nomal">' + v + '</li>'));
 				});
 				return that.selectItem(that.dataListView.find("li:first"))
 					.addMouseEventListItem()
